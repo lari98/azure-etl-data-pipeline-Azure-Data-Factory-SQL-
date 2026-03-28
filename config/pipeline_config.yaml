@@ -1,0 +1,42 @@
+# ETL Pipeline Configuration
+# Mirrors Azure Data Factory pipeline settings
+
+pipeline:
+  name: "ecommerce_etl"
+  version: "1.0.0"
+  schedule: "daily"  # In production: Azure Data Factory trigger
+
+sources:
+  transactions:
+    type: "csv"
+    path: "data/raw/transactions.csv"
+    delimiter: ","
+    encoding: "utf-8"
+  customers:
+    type: "csv"
+    path: "data/raw/customers.csv"
+  products:
+    type: "json"
+    path: "data/raw/products.json"
+  channels:
+    type: "csv"
+    path: "data/raw/channels.csv"
+
+staging:
+  path: "data/staging"
+  format: "csv"
+
+warehouse:
+  type: "sqlite"
+  path: "data/warehouse/ecommerce.db"
+  schema: "dw"
+  export_path: "data/warehouse"
+
+quality:
+  null_threshold: 0.05          # Max 5% nulls per column
+  duplicate_threshold: 0.001    # Max 0.1% duplicate records
+  schema_strict: true           # Enforce exact schema match
+
+logging:
+  level: "INFO"
+  file: "data/pipeline.log"

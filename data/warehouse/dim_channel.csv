@@ -1,0 +1,6 @@
+channel_id,channel_name,channel_type,channel_key
+CH01,Website,Online,1
+CH02,Mobile App,Online,2
+CH03,Marketplace,Online,3
+CH04,Retail Store,Offline,4
+CH05,Phone Order,Offline,5
